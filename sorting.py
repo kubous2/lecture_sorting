@@ -23,22 +23,40 @@ def read_data(file_name):
                     dict [header].append(int(value))
     return dict
 
-def selection_sort(cisla):
+#Selection Sort
+def selection_sort(cisla, direction):
+    #první for cyklus si pamatuje indexy čísel
     for i in range (len(cisla)):
         min_index = i
-        for j in range(i+1, len(cisla)):
-            if cisla [j]< cisla[min_index]:
-                min_index = j
-        #prohození čísel
-        cisla[i], cisla[min_index] = cisla[min_index], cisla [i]
+        if direction == True:
+            for j in range(min_index+1, len(cisla)):
+                if cisla[j]< cisla[min_index]:
+                    min_index = j
+        elif direction == False:
+            for j in range(min_index+1, len(cisla)):
+                if cisla[j]> cisla[min_index]:
+                    min_index = j
+        # prohození čísel
+        cisla[i], cisla[min_index] = cisla[min_index], cisla[i]
+    return cisla
+
+# Bubble Sort
+def bubble_sort(cisla):
+    for i in range(len(cisla)):
+        for j in range(0, len(cisla)-i-1):
+            if cisla[j] > cisla [j+1]:
+                cisla[j], cisla[j+1] = cisla[j+1], cisla[j]
     return cisla
 
 
 def main():
     data = read_data("numbers.csv")
     print(data)
-    sort = selection_sort(data["series_1"])
-    print (sort)
+    sort_s = selection_sort(data["series_1"], False)
+    print (sort_s)
+    sort_b = bubble_sort(data["series_2"])
+    print (sort_b)
+
 
 
 if __name__ == '__main__':
